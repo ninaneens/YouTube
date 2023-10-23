@@ -19,8 +19,8 @@ st.title("YOUTUBE TREND PREDICTOR")
 st.sidebar.header("Dashboard")
 st.sidebar.markdown("---")
 
-# Dropdown menu for selecting the page mode (Introduction, Visualization, Prediction)
-app_mode = st.sidebar.selectbox('🔎 Select Page',['Introduction','Visualization','Prediction'])
+# Dropdown menu for selecting the page mode (Introduction, Visualization, Prediction, Analysis)
+app_mode = st.sidebar.selectbox('🔎 Select Page',['Introduction','Visualization','Prediction', 'Analysis'])
 
 # Dropdown menu for selecting the dataset (currently only "Wine Quality" is available)
 select_dataset =  st.sidebar.selectbox('💾 Select Dataset',["Youtube Data"])
@@ -192,5 +192,19 @@ if app_mode == 'Prediction':
     st.write("2) The Mean Absolute Error of the model is:", np.round(mt.mean_absolute_error(predictions,y_test),2))
     st.write("3) MSE: ", np.round(mt.mean_squared_error(predictions,y_test),2))
     st.write("4) The R-Square score of the model is " , np.round(mt.r2_score(predictions,y_test),2))
+if app_mode == "Analysis":
+    st.markdown("## Analysis")
 
-    
+# Allow users to select two variables from the dataset for visualization
+    symbols = st.multiselect("Select two variables", list_variables, ["views", "likes"])
+
+    # Create a slider in the sidebar for users to adjust the plot width
+    width1 = st.sidebar.slider("plot width", 1, 25, 10)
+
+    # Create tabs for different types of visualizations
+    tab = st.tabs(["📈 Correlation"])
+
+    # Content for the "Bar Chart" tab
+    tab.subheader("Bar Chart")
+    # Display a bar chart for the selected variables
+    st.bar_chart(data=df, x=symbols[0], y=symbols[1], use_container_width=True)
