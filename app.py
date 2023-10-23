@@ -210,7 +210,14 @@ if app_mode == "Analysis":
 
 if app_mode == "Emissions":
     st.markdown("## Emissions")
+    try:
+        tracker = EmissionsTracker(measure_power_secs=10)
+        tracker.start_task("load dataset")
+        dataset = load_dataset("usvideosedited.csv", split="test")
+        youtube_emissions = tracker.stop_task()
+        tracker.start_task("build model")
+        model = build_model()
+        model_emissions = tracker.stop_task()
+    finally:
+        _ = tracker.stop()
 
-    tracker = EmissionsTracker()
-    tracker.start()
-    tracker.stop()
