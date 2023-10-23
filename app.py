@@ -14,6 +14,10 @@ import altair as alt
 
 from codecarbon import EmissionsTracker
 
+tracker = EmissionsTracker()
+tracker.start()
+tracker.stop()
+
 # Set the title for the Streamlit app >>>>>>>>>>>>
 st.title("YOUTUBE TREND PREDICTOR")
 
@@ -22,7 +26,7 @@ st.sidebar.header("Dashboard")
 st.sidebar.markdown("---")
 
 # Dropdown menu for selecting the page mode (Introduction, Visualization, Prediction, Analysis)
-app_mode = st.sidebar.selectbox('🔎 Select Page',['Introduction','Visualization','Prediction', 'Analysis', 'Emissions'])
+app_mode = st.sidebar.selectbox('🔎 Select Page',['Introduction','Visualization','Prediction', 'Analysis'])
 
 # Dropdown menu for selecting the dataset (currently only "Wine Quality" is available)
 select_dataset =  st.sidebar.selectbox('💾 Select Dataset',["Youtube Data"])
@@ -207,17 +211,4 @@ if app_mode == "Analysis":
     st.bar_chart(data=df, x=symbols[0], y=symbols[1], use_container_width=True)
 
     st.markdown("[PUT ANALYSIS HERE]")
-
-if app_mode == "Emissions":
-    st.markdown("## Emissions")
-    try:
-        tracker = EmissionsTracker(measure_power_secs=10)
-        tracker.start_task("load dataset")
-        dataset = load_dataset("usvideosedited.csv", split="test")
-        youtube_emissions = tracker.stop_task()
-        tracker.start_task("build model")
-        model = build_model()
-        model_emissions = tracker.stop_task()
-    finally:
-        _ = tracker.stop()
 
