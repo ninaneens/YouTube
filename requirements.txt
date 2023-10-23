@@ -6,6 +6,5 @@ seaborn
 scikit-learn
 plotly
 streamlit
-random
-PIL
+pillow
 altair
