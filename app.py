@@ -201,10 +201,5 @@ if app_mode == "Analysis":
     # Create a slider in the sidebar for users to adjust the plot width
     width1 = st.sidebar.slider("plot width", 1, 25, 10)
 
-    # Create tabs for different types of visualizations
-    tab = st.tabs(["📈 Correlation"])
-
-    # Content for the "Bar Chart" tab
-    tab.subheader("Bar Chart")
     # Display a bar chart for the selected variables
     st.bar_chart(data=df, x=symbols[0], y=symbols[1], use_container_width=True)
