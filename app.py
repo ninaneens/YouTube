@@ -15,8 +15,6 @@ import altair as alt
 from codecarbon import EmissionsTracker
 tracker = EmissionsTracker()
 tracker.start()
-print("hello world")
-tracker.stop()
 
 # Set the title for the Streamlit app >>>>>>>>>>>>
 st.title("YOUTUBE TREND PREDICTOR")
@@ -199,5 +197,5 @@ if app_mode == 'Prediction':
     st.write("3) MSE: ", np.round(mt.mean_squared_error(predictions,y_test),2))
     st.write("4) The R-Square score of the model is " , np.round(mt.r2_score(predictions,y_test),2))
 
-
+    tracker.stop()
     
