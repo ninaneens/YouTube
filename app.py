@@ -208,5 +208,7 @@ if app_mode == "Analysis":
     # Display a bar chart for the selected variables
     st.bar_chart(data=df, x=symbols[0], y=symbols[1], use_container_width=True)
 
-    st.markdown("[PUT ANALYSIS HERE]")
-
+    st.markdown("[1. Generally, videos that have received more views, are correlated with higher number of dislikes. We can conclude from this that more controversial or abnormal videos content is a key factor in trend prediction. Youtubers may consider this factor when publishing a video, if their aim is to acquire a higher number of views rather than a high number of likes]")
+    st.markdown("[2. There is a strong correlation between trending date and number of likes. This means that youtubers should consider when they are posting their video, and do additional research to understand if their date/month of posting will be beneficial to the trendiness of their content. We can also understand from this that the “trending” of a video does not solely rely on the specific content produced, but the time of its production.]")
+    st.markdown("[3. The number of likes received on a video is slightly higher when the comment section is enabled, verses when the comments are disabled. This means that when a youtuber should consider this factor if they are aiming to trend on a larger scale.]")
+    st.markdown("[4. Our prediction concludes that the most important factor in trend prediction is the date of publication. The videos with the most views (=trendiness), all have been published in the same general time period.]")
