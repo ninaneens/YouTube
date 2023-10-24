@@ -33,7 +33,7 @@ select_dataset =  st.sidebar.selectbox('💾 Select Dataset',["Youtube Data"])
 
 # Load the wine quality dataset >>>>>>>>>>>>
 df = pd.read_csv("usvideosedited.csv")
-dfnew = df[["views", "trending_date", "dislikes", "comment_count", "comments_disabled", "ratings_disabled", "video_error_or_removed"]]
+dfnew = df[["views", "upload_time", "trending_date", "dislikes", "comment_count", "comments_disabled", "ratings_disabled", "video_error_or_removed"]]
 dfnew["comments_disabled"] = dfnew["comments_disabled"].astype("category").cat.codes
 dfnew["ratings_disabled"] = dfnew["ratings_disabled"].astype("category").cat.codes
 dfnew["video_error_or_removed"] = dfnew["video_error_or_removed"].astype("category").cat.codes
