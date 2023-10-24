@@ -18,6 +18,9 @@ tracker = EmissionsTracker()
 tracker.start()
 tracker.stop()
 
+image_youtube = Image.open('youtube.png')
+st.image(image_youtube, width=100)
+
 # Set the title for the Streamlit app >>>>>>>>>>>>
 st.title("YOUTUBE TREND PREDICTOR")
 
@@ -99,37 +102,43 @@ if app_mode == 'Introduction':
 
 
 if app_mode == 'Visualization':
-    # Display a header for the Visualization section
+
     st.markdown("## Visualization")
 
-    # Allow users to select two variables from the dataset for visualization
     symbols = st.multiselect("Select two variables", list_variables, ["views", "likes"])
 
-    # Create a slider in the sidebar for users to adjust the plot width
+
     width1 = st.sidebar.slider("plot width", 1, 25, 10)
 
-    # Create tabs for different types of visualizations
-    tab1, tab2 = st.tabs(["Line Chart", "📈 Correlation"])
 
-    # Content for the "Line Chart" tab
-    tab1.subheader("Line Chart")
-    # Display a line chart for the selected variables
-    st.line_chart(data=df, x=symbols[0], y=symbols[1], width=0, height=0, use_container_width=True)
-    # Display a bar chart for the selected variables
-    st.bar_chart(data=df, x=symbols[0], y=symbols[1], use_container_width=True)
+    tab1, tab2, tab3, tab4 = st.tabs(["Line Chart📈", "Bar Chart📊", "Correlation🔥", "Pair Plot"])
 
-    # Content for the "Correlation" tab
-    tab2.subheader("Correlation Tab 📉")
-    # Create a heatmap to show correlations between variables in the dataset
-    fig, ax = plt.subplots(figsize=(width1, width1))
-    sns.heatmap(df.corr(), cmap=sns.cubehelix_palette(8), annot=True, ax=ax)
-    tab2.write(fig)
 
-    # Display a pairplot for the first five variables in the dataset
-    st.markdown("### Pairplot")
-    df2 = df
-    fig3 = sns.pairplot(df2)
-    st.pyplot(fig3)
+    if tab1.button("Show Line Chart Code"):
+        st.line_chart(data=df, x=symbols[0], y=symbols[1], width=0, height=0, use_container_width=True)
+        tab1.subheader("Line Chart")
+        #tab1.line_chart(data=df, x=symbols[0],y=symbols[1], width=0, height=0, use_container_width=True)
+        tab1.write(" ")
+        
+
+    if tab2.button("Show Bar Chart Code"):
+        st.bar_chart(data=df, x=symbols[0], y=symbols[1], use_container_width=True)
+        tab2.subheader("Bar Chart Tab")
+       
+    
+    #tab3
+    if tab3.button("Show Correlation Code"):
+        fig, ax = plt.subplots(figsize=(width1, width1))
+        sns.heatmap(df.corr(), cmap=sns.cubehelix_palette(8), annot=True, ax=ax)
+        tab3.write(fig)
+
+
+        #tab4
+    if tab4.button("Show Pairplot Code"):
+        st.markdown("### Pairplot")
+        df2 = df
+        fig3 = sns.pairplot(df2)
+        st.pyplot(fig3)
 
 # Check if the app mode is set to 'Prediction'
 if app_mode == 'Prediction':
